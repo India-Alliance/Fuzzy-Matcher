@@ -13,7 +13,7 @@ def upload():
 def uploadSuccess():
     f = request.files['file']
     f.save(f.filename)
-    standardised_name = standardise.standardiseList(f.filename)
+    standardised_name = standardise.standardise_list(f.filename)
     print(standardised_name)
     return render_template(
         "success.html", tables=[
@@ -24,7 +24,7 @@ def uploadSuccess():
 @app.route("/success", methods=["POST"])
 def show_disambiguated_name():
     entered_name = request.form['name-entry-field']
-    standardised_name = standardise.standardiseName(entered_name)
+    standardised_name = standardise.standardise_name(entered_name)
     return render_template(
         "success.html", tables=[
             standardised_name.to_html(

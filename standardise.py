@@ -11,7 +11,7 @@ def get_standard_univs_names():
     return standard_univs['Name']
 
 
-def standardiseName(uploaded_name):
+def standardise_name(uploaded_name):
     standard_univs = initialise_standard_univ_list()
     standard_univs_names = standard_univs['Name']
     if (len(uploaded_name) < 6 or (
@@ -23,17 +23,16 @@ def standardiseName(uploaded_name):
     return convert_to_data_frame(matched_names, uploaded_name)
 
 
-def standardiseList(file):
+def standardise_list(file):
     t1 = time.time()
     uploaded_data = pd.read_csv(file)
     lead_applicant_organisation = 'Lead Applicant Applicant Organisation'
     uploaded_names = uploaded_data[lead_applicant_organisation].dropna()
     standard_univs_names = get_standard_univs_names()
-    uploaded_names = uploaded_names[:100]  # Testing. Remove on production
     matched_names = [process.extractOne(uploaded_name, standard_univs_names)
                      for uploaded_name in tqdm(uploaded_names)]
 
     matched_names_df = convert_to_data_frame(matched_names, uploaded_names)
     matched_names_df.to_csv('StandardUnivNames.csv')
-    print(time.time() - t1)
+    print(f"Total time taken for operation - {time.time() - t1}")
     return matched_names_df
