@@ -35,17 +35,22 @@ def validate_json_instance(json_instance):
 
 
 def validate_csv_dataset(path_to_file, log_file=None):
-    with open(path_to_file, 'r') as f:
-        errors_map = {}
+    errors_map = {}
 
-        df = pd.read_csv(path_to_file)
+    df = pd.read_csv(path_to_file)
 
-        for i, row in df.iterrows():
-            json_instance = row.to_dict()
-            errors_map[i+1] = validate_json_instance(json_instance)
+    for i, row in df.iterrows():
+        json_instance = row.to_dict()
+        errors_map[i+1] = validate_json_instance(json_instance)
+
+    if log_file:
+        with open(log_file, 'w') as f:
+            for row, errors in errors_map.items():
+                for error in errors:
+                    f.write(f"Row {row}. Error: {error}\n")
 
     return errors_map
 
 
 if __name__ == "__main__":
-    errors_map = validate_csv_dataset('test.csv')
+    errors_map = validate_csv_dataset('test.csv', 'log.txt')
