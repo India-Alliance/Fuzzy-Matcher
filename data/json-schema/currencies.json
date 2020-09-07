@@ -1,10 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
-  "title": "Base schema.",
-  "type": "object",
-  "definitions": {
+"definitions": {
     "currency": {
       "type": "string",
+      "title": "Currency Schema",
       "description": "The currency used in amounts. Use the three-letter currency code from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) eg: Use GBP for Pounds Sterling.",
       "enum": [
         "ADP",
@@ -308,36 +306,7 @@
         "ZWL",
         "ZWN",
         "ZWR"
-      ],
-      "title": "Currency"
+      ]
     }
-  },
-  "required": [
-    "applicationId",
-    "email"
-  ],
-  "properties": {
-    "email": {
-      "type": "string",
-      "description": "Applicant's e mail address",
-      "format": "email",
-      "title": "Email"
-    },
-    "applicationId": {
-      "type": "string",
-      "description": "Unique identifier of the application",
-      "title": "Application Id"
-    },
-    "amountAwarded": {
-      "type": "number",
-      "description": "Total amount awarded in numbers (do not include commas or currency symbols such as \u00a3).",
-      "title": "Amount awarded"
-    },
-    "currency": {
-      "$ref": "currencies.json#/definitions/currency"
-    },
-    "university": {
-      "$ref": "universities.json#/definitions/university"
-    }
-  }
+}
 }
