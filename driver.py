@@ -1,7 +1,8 @@
 import os
 import sys
 from validator.validate_data import validate_csv_dataset 
-from standardise import standardise_list
+from matcher.standardise import standardise_list
+import pandas as pd
 
 def setup_input_output_paths():
   path_to_input_file = sys.argv[1] if len(sys.argv) > 1 else 'test.csv'
@@ -22,13 +23,13 @@ def validate_and_suggest_corrections(path_to_file=None):
   path_to_input_file, path_to_output_file = setup_input_output_paths()
 
   unmatched_entities = validate_csv_dataset(path_to_input_file, log_file=path_to_output_file)
-
+  print('Entries which were not matched ', unmatched_entities)
   ## Now let us try fuzzy matching names to identify typos or non-standard entries.
 
   ## First let's run the university standardiser
 
   pd.DataFrame({'uploaded_names':unmatched_entities['university']}).to_csv('entries_to_fuzzy_match.csv')
-  matchedNames = standardise_list('entries_to_fuzzy_match.csv', column_name=uploaded_names)
+  matchedNames = standardise_list('entries_to_fuzzy_match.csv', column_name_to_standardise='uploaded_names')
   print(matchedNames)
 
 if __name__ == "__main__":

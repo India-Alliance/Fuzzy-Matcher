@@ -1,1 +1,11 @@
 __pycache__/
+
+Misc/
+
+.idea
+
+.ipynb_checkpoints
+
+data/GridUnivsData
+
+*.csv
