@@ -16,7 +16,7 @@ def standardise_name(uploaded_name):
     standard_univs_names = standard_univs['Name']
 
     acronym_match = pd.DataFrame(standard_univs.loc[standard_univs['acronym']
-                        == uploaded_name, 'Name'])
+                                == uploaded_name, 'Name'])
     if not acronym_match.empty:
         return acronym_match
 

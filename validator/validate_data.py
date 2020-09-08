@@ -1,11 +1,9 @@
-import ast
 import json
 import os
 
 import jsonschema
 import pandas as pd
 from collections import defaultdict
-import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -32,7 +30,8 @@ def validate_json_instance(json_instance, UNMATCHED_ENTITIES):
                       f"property ({error.absolute_schema_path[1]})"
 
         errors.append(message)
-        UNMATCHED_ENTITIES[error.absolute_schema_path[1]].append(error.instance)
+        UNMATCHED_ENTITIES[error.absolute_schema_path[1]]
+        .append(error.instance)
 
     return errors
 
@@ -40,13 +39,13 @@ def validate_json_instance(json_instance, UNMATCHED_ENTITIES):
 def validate_csv_dataset(path_to_file, log_file=None):
     errors_map = {}
     path_to_file = os.path.join(os.path.abspath(os.getcwd()), path_to_file)
-    print(path_to_file)
     df = pd.read_csv(path_to_file)
     UNMATCHED_ENTITIES = defaultdict(list)
 
     for i, row in df.iterrows():
         json_instance = row.to_dict()
-        errors_map[i+1] = validate_json_instance(json_instance, UNMATCHED_ENTITIES)
+        errors_map[i+1] = validate_json_instance(
+            json_instance, UNMATCHED_ENTITIES)
 
     if log_file:
         with open(log_file, 'w') as f:
