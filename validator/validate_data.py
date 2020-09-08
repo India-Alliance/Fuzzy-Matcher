@@ -30,8 +30,7 @@ def validate_json_instance(json_instance, UNMATCHED_ENTITIES):
                       f"property ({error.absolute_schema_path[1]})"
 
         errors.append(message)
-        UNMATCHED_ENTITIES[error.absolute_schema_path[1]]
-        .append(error.instance)
+        UNMATCHED_ENTITIES[error.absolute_schema_path[1]].append(error.instance)
 
     return errors
 
