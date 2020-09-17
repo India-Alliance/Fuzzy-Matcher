@@ -334,7 +334,7 @@
       "title": "Amount awarded"
     },
     "currency": {
-      "$ref": "main-schema.json#/definitions/currency"
+      "$ref": "currencies.json#/definitions/currency"
     },
     "university": {
       "$ref": "universities.json#/definitions/university"
