@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+# Fuzzy-Matcher
+Fuzzy Match a name with a standard list	Fuzzy Match a name with a standard list
 
-You can use the [editor on GitHub](https://github.com/India-Alliance/Fuzzy-Matcher/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Components
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The module is broadely divided into three main parts :-
+1. Validator
+2. Matcher
+3. Updater
 
-### Markdown
+### Valdiator
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Valdiation is done via specifying a schema as json.
+The parent file is `main-schema.json`. As of the first release, we are pushing currency and university name validations.
+The specific schema requirements are specified in their own schema files, `currencies.json` and `universities.json` respectively.
 
-```markdown
-Syntax highlighted code block
+#### So, what does the Validator do ?
 
-# Header 1
-## Header 2
-### Header 3
+The Validator performs a simple sanity check on the data entered and returns the non-conformant data. In layman terms, the validator performs a sort of simple string comparison over the requested entities. The entries which are not exactly matched or are in an unconventional format, example, a digit in university name or a four letter currency ISO code, are identified here. This sets the stage for our Fuzzy-Matcher.
 
-- Bulleted
-- List
+### Matcher
 
-1. Numbered
-2. List
+Matcher uses the `fuzzywuzzy` library. It computes the [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) for   string comparison.
 
-**Bold** and _Italic_ and `Code` text
+The matcher takes in the non-exact matches as returned by the validator. It then tries to fuzzy match these names against our standard list obtained from [grid.ac](https://grid.ac/downloads).
 
-[Link](url) and ![Image](src)
-```
+### Updater
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+This is a simple script that overwrites the non-conformant entries after the user reviews them. This is run separately since it can run only after the user reviews the suggestions by the matcher.
 
-### Jekyll Themes
+## Running the modules
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/India-Alliance/Fuzzy-Matcher/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+1. First, install the dependencies with 
 
-### Support or Contact
+    `pip -r requirements.txt`
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+2. The file, `driver.py` runs the Validator and Matcher and `updater.py` runs the final update script.
+
+3. The usage is as follows
+
+    `python driver.py <path_to_input_file> <path_to_output_file>`
+
+4. This generates two files -
+
+    - Non-conformant data entries are returned by the validator in a csv named `entries_to_fuzzy_match.csv`.
+    - `entries_to_fuzzy_match.csv` is fed to the matcher which outputs `Suggestions.csv`
+
+5. An extra column called `'Correct (1/0)'` is added to `Suggestions.csv` where the user determines which entry to update.
+6. This updated `Suggestions.csv` is now read by `updater.py` which updates the originally uploaded data with the standardised entries.
