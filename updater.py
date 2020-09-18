@@ -9,7 +9,7 @@ def update_the_correct_entries():
     parser.add_argument("column_to_update", help="Name of the column to update")
     args = parser.parse_args()
     suggestions = pd.read_csv('Suggestions.csv')
-    entries_to_update = suggestions.loc[suggestions['Correct (True/False)'] == True]
+    entries_to_update = suggestions.loc[suggestions['Correct (1/0)'] == True]
     uploaded_data = pd.read_csv(args.path_to_input_file)
     for index in tqdm(entries_to_update.index):
         entry = entries_to_update.loc[index]
