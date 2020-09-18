@@ -8,9 +8,13 @@ The module is broadely divided into three main parts :-
 2. Matcher
 3. Updater
 
-### Valdiator
+Here is a flow chart of how the fuzzy matcher works:
 
-Valdiation is done via specifying a schema as json.
+![Flow chart](docs/fuzzy-matcher-and-data-validator-2.png)
+
+### Validator
+
+Validation is done via specifying a schema as json.
 The parent file is `main-schema.json`. As of the first release, we are pushing currency and university name validations.
 The specific schema requirements are specified in their own schema files, `currencies.json` and `universities.json` respectively.
 
