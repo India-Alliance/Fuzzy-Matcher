@@ -4,23 +4,9 @@
   "type": "object",
   "required": [
     "applicationId",
-    "email",
-    "funder",
-    "fundingYear"
+    "email"
   ],
   "properties": {
-    "funder": {
-      "type": "string",
-      "description": "Name of the funder",
-      "title": "Funder name"
-    },
-    "fundingYear": {
-      "type": "integer",
-      "minimum": 1900,
-      "maximum": 2021,
-      "description":"Calendar year, not financial year",
-      "title": "Funding year"
-    },
     "email": {
       "type": "string",
       "description": "Applicant's e mail address",
@@ -40,11 +26,8 @@
     "currency": {
       "$ref": "currencies.json#/definitions/currency"
     },
-    "affiliationCurrent": {
+    "university": {
       "$ref": "universities.json#/definitions/university"
-    },
-    "countryCurrent": {
-      "$ref": "countries.json#/definitions/country"
     }
   }
 }
