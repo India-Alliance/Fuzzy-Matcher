@@ -21,7 +21,6 @@ def standardise_name(uploaded_name):
         return acronym_match
 
     return process.extractOne(uploaded_name, standard_univs_names)
-    # return convert_to_data_frame(matched_names, uploaded_name)
 
 
 def standardise_list(file, column_name_to_standardise='uploaded_names'):
@@ -37,6 +36,8 @@ def standardise_list(file, column_name_to_standardise='uploaded_names'):
                      for uploaded_name in tqdm(uploaded_names)]
 
     matched_names_df = convert_to_data_frame(matched_names, uploaded_names)
-    matched_names_df.to_csv('StandardUnivNames2.csv')
+    matched_names_df['Correct (1/0)'] = pd.Series()
+    # The above column has to be manually filled in by the reviewer
+    matched_names_df.to_csv('Suggestions.csv')
     print(f"Total time taken for operation - {time.time() - t1}")
     return matched_names_df
