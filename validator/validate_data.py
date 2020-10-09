@@ -70,7 +70,6 @@ def validate_csv_dataset(path_to_file, log_file=None):
             for row, errors in errors_map.items():
                 for error in errors:
                     f.write(f"Row {row}. Error: {error}\n")
-                    print(f"Row {row}. Error: {error}")
     else:
         print(errors_map)
 
