@@ -40,12 +40,13 @@ def _safe_eval_items(input_dict):
     """Safely evaluate items of dictionary, falling back to string"""
     output_dict = {}
     for key, value in input_dict.items():
-        try:
-            eval_value = ast.literal_eval(value)
-        except ValueError:
-            eval_value = value
-        finally:
-            output_dict[key] = eval_value
+        if value:
+            try:
+                eval_value = ast.literal_eval(value)
+            except ValueError:
+                eval_value = value
+            finally:
+                output_dict[key] = eval_value
 
     return output_dict
 
@@ -53,7 +54,9 @@ def _safe_eval_items(input_dict):
 def validate_csv_dataset(path_to_file, log_file=None):
     errors_map = {}
     path_to_file = os.path.join(os.path.abspath(os.getcwd()), path_to_file)
-    df = pd.read_csv(path_to_file, dtype=object)
+    df = pd.read_csv(path_to_file, dtype=object,
+                     keep_default_na=False, na_values=None)
+
     UNMATCHED_ENTITIES = defaultdict(list)
 
     for i, row in df.iterrows():
@@ -67,6 +70,7 @@ def validate_csv_dataset(path_to_file, log_file=None):
             for row, errors in errors_map.items():
                 for error in errors:
                     f.write(f"Row {row}. Error: {error}\n")
+                    print(f"Row {row}. Error: {error}")
     else:
         print(errors_map)
 
