@@ -25,8 +25,9 @@ def initialise_standard_univ_list():
 
     aliases = aliases.rename(columns={"grid_id": "ID"})
 
-    standard_and_alias_univ_names = pd.merge(all_univs, aliases, on='ID', how='outer')
+    standard_and_alias_univ_names = pd.merge(all_univs, aliases, on='ID', how='left')
 
     acronyms = acronyms.rename(columns={"grid_id": "ID"})
 
-    return pd.merge(standard_and_alias_univ_names, acronyms, on='ID', how='outer')
+    pd.merge(standard_and_alias_univ_names, acronyms, on='ID', how='outer').to_csv('MergedList.csv')
+    return pd.merge(standard_and_alias_univ_names, acronyms, on='ID', how='left')

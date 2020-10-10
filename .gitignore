@@ -6,8 +6,4 @@ Misc/
 
 .ipynb_checkpoints
 
-data/GridUnivsData
-
-*.csv
-
 *.txt
