@@ -20,9 +20,8 @@ def initialise_standard_univ_list():
         acronyms = pd.read_csv(f"{path}{sub_path}acronyms.csv")
         print("Fetch from remote Acronym")
 
-    else:
-        acronyms = pd.read_csv('data/GridUnivsData/acronyms.csv')
+    standard_and_alias_univ_names = pd.merge(all_univs, aliases, on='ID', how='left')
 
     acronyms = acronyms.rename(columns={"grid_id": "ID"})
 
-    return pd.merge(all_univs, acronyms, on='ID', how='outer')
+    return pd.merge(standard_and_alias_univ_names, acronyms, on='ID', how='left')
