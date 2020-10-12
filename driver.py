@@ -30,8 +30,7 @@ def validate_and_suggest_corrections(path_to_file=None):
     # typos or non-standard entries.
 
     # First let's run the university standardiser
-    column_to_update = 'university'
-    uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['university']})
+    uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['affiliationCurrent']})
     uploaded_names_df.to_csv('entries_to_fuzzy_match.csv')
 
     matchedNames = standardise_list('entries_to_fuzzy_match.csv',

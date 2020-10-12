@@ -26,8 +26,7 @@ def standardise_name(uploaded_name):
 
     alias_match = process.extractOne(uploaded_name, standard_univs['alias'])
     full_name_match = process.extractOne(uploaded_name, standard_univs['Name'])
-    print(alias_match)
-    print(full_name_match)
+
     # The tuples - alias_match and full_name_match have three values -
     # (Name Matched, Confidence and Index Number in the standard list)
     # We are here comparing confidence between the full name match and the alias match
