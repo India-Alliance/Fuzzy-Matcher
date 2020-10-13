@@ -43,7 +43,7 @@ def _safe_eval_items(input_dict):
         if value:
             try:
                 eval_value = ast.literal_eval(value)
-            except ValueError:
+            except (ValueError, SyntaxError):
                 eval_value = value
             finally:
                 output_dict[key] = eval_value
