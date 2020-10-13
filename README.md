@@ -41,7 +41,6 @@ This is a simple script that overwrites the non-conformant entries after the use
 2. The file, `driver.py` runs the Validator and Matcher and `updater.py` runs the final update script.
 
 3. The usage is as follows. The input file is the file which one needs to standardise. The error logs are generated in the output file. Both of these can be optionally specified. The default names for input and output files are `test.csv` and `log.txt`. Note that the input file must be a `.csv`.
->>>>>>> ee18545132db99be04ba290afc3c3b2bedcbc1af
 
     `python driver.py <path_to_input_file> <path_to_output_file>`
 
