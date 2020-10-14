@@ -11,14 +11,14 @@ def get_standard_univs_names():
     return standard_univs['Name']
 
 
-def standardise_name(uploaded_name):
-    standard_univs = initialise_standard_univ_list()
+def standardise_name(uploaded_name, standard_univs):
+    acronym_match = standard_univs.loc[
+        standard_univs['acronym'] == uploaded_name, 'Name'
+    ]
 
-    acronym_match = standard_univs.loc[standard_univs['acronym']
-                                == uploaded_name, 'Name']
     if not acronym_match.empty:
         val = acronym_match.values[0]
-        return (val, 100, acronym_match.index[0])
+        return val, 100, acronym_match.index[0]
 
     # Alias matches
 
@@ -52,7 +52,11 @@ def standardise_list(file, column_name_to_standardise='uploaded_names'):
         return pd.DataFrame()
 
     uploaded_names = uploaded_data[column_name_to_standardise].dropna().unique()
-    matched_names = [standardise_name(uploaded_name)
+
+    # Initialises list of universities
+    standard_univs = initialise_standard_univ_list()
+
+    matched_names = [standardise_name(uploaded_name, standard_univs)
                      for uploaded_name in tqdm(uploaded_names)]
 
     matched_names_df = convert_to_data_frame(matched_names, uploaded_names)
