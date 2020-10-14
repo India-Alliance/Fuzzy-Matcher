@@ -48,7 +48,7 @@ def _safe_eval_items(input_dict):
             finally:
                 output_dict[key] = eval_value
 
-    return input_dict
+    return output_dict
 
 
 def validate_csv_dataset(path_to_file, log_file=None):
