@@ -21,7 +21,7 @@ def setup_input_output_paths(path_to_file):
 
 
 def validate_and_suggest_corrections(path_to_file=None,
-                                     column_to_update="university"):
+                                     column_to_update="affiliationCurrent"):
     path_to_input_file, path_to_output_file = setup_input_output_paths(path_to_file)
 
     unmatched_entities = validate_csv_dataset(path_to_input_file,
