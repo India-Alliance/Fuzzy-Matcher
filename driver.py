@@ -20,7 +20,8 @@ def setup_input_output_paths(path_to_file):
     return path_to_input_file, path_to_output_file
 
 
-def validate_and_suggest_corrections(path_to_file=None):
+def validate_and_suggest_corrections(path_to_file=None,
+                                     column_to_update="university"):
     path_to_input_file, path_to_output_file = setup_input_output_paths(path_to_file)
 
     unmatched_entities = validate_csv_dataset(path_to_input_file,
@@ -30,7 +31,10 @@ def validate_and_suggest_corrections(path_to_file=None):
     # typos or non-standard entries.
 
     # First let's run the university standardiser
-    uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['affiliationCurrent']})
+
+    uploaded_names_df = pd.DataFrame(
+        {'uploaded_names': unmatched_entities[column_to_update]}
+    )
     uploaded_names_df.to_csv('entries_to_fuzzy_match.csv')
 
     standardise_list('entries_to_fuzzy_match.csv',
