@@ -33,9 +33,9 @@ def validate_and_suggest_corrections(path_to_file=None):
     uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['affiliationCurrent']})
     uploaded_names_df.to_csv('entries_to_fuzzy_match.csv')
 
-    matchedNames = standardise_list('entries_to_fuzzy_match.csv',
-                                    column_name_to_standardise='uploaded_names')
+    standardise_list('entries_to_fuzzy_match.csv',
+                     column_name_to_standardise='uploaded_names')
 
 
 if __name__ == "__main__":
-    errors_map = validate_and_suggest_corrections()
+    validate_and_suggest_corrections()
