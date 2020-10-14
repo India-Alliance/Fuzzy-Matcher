@@ -1,4 +1,5 @@
 from fuzzywuzzy import process
+from fuzzywuzzy.utils import full_process
 import pandas as pd
 import time
 from matcher.initialise_standard_univ_list import initialise_standard_univ_list
@@ -55,6 +56,10 @@ def standardise_list(file, column_name_to_standardise='uploaded_names'):
 
     # Initialises list of universities
     standard_univs = initialise_standard_univ_list()
+    # Processes list of universities
+    standard_univs['Name'] = standard_univs['Name'].apply(
+        lambda x: full_process(x, force_ascii=True)
+    )
 
     matched_names = [standardise_name(uploaded_name, standard_univs)
                      for uploaded_name in tqdm(uploaded_names)]
