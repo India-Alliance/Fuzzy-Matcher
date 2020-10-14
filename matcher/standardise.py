@@ -23,7 +23,6 @@ def standardise_name(uploaded_name, standard_univs):
 
     processed_name = full_process(uploaded_name, force_ascii=True)
 
-
     # Name match scores
     standard_univs['full_name_similarity'] = standard_univs['Name'].apply(
         lambda x: fuzz.ratio(processed_name, x)
