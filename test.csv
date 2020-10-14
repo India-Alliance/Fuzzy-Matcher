@@ -1,5 +1,7 @@
-email,funder,applicationId,amountAwarded,currency,affiliantionCurrent,fundingYear,countryCurrent
-Ivar@ki.lo,Wellcome Trust,Like,12999,INR,Cambridge,2020,GB
-Iol,Wellcome,23423,ioio,KIL,Sangath,8.4,XX
+email,funder,applicationId,amountAwarded,currency,affiliationCurrent,fundingYear,countryCurrent
+Ivar@ki.lo,Wellcome,Like,12999,INR,Cambridge,2020,GB
+Iol,Wellcome,23423,ioio,KIL,Sangath,8,XX
 ref@kil.com,Wellcome,22341,122333,INR,IISc,2000,BR
-qwewqeq,Wellcome,12334,1212,JKE,Manchester,Dunno,
+qwewqeq,Wellcome,12334,1212,JKE,Manchester,Dunno,INR
+qwewqeq,Wellcome,12334,1212,JKE,National,Yayy,AUS
+qwewqeq,Wellcome,12334,1212,JKE,IITB,2012,IN

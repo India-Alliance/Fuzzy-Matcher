@@ -25,18 +25,16 @@ def validate_and_suggest_corrections(path_to_file=None):
 
     unmatched_entities = validate_csv_dataset(path_to_input_file,
                                               log_file=path_to_output_file)
-    print('Entries which were not matched ', unmatched_entities)
+    print('Entries which were not matched \n\n', unmatched_entities)
     # Now let us try fuzzy matching names to identify
     # typos or non-standard entries.
 
     # First let's run the university standardiser
-    column_to_update = 'university'
-    uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['university']})
+    uploaded_names_df = pd.DataFrame({'uploaded_names': unmatched_entities['affiliationCurrent']})
     uploaded_names_df.to_csv('entries_to_fuzzy_match.csv')
 
     matchedNames = standardise_list('entries_to_fuzzy_match.csv',
                                     column_name_to_standardise='uploaded_names')
-    print(matchedNames)
 
 
 if __name__ == "__main__":
