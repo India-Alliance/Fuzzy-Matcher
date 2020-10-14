@@ -29,9 +29,9 @@ def validate_json_instance(json_instance, UNMATCHED_ENTITIES):
         if 'enum' in error.absolute_schema_path:
             message = f"{error.instance} is not a valid value for schema " \
                       f"property ({error.absolute_schema_path[1]})"
+            UNMATCHED_ENTITIES[error.absolute_schema_path[1]].append(error.instance)
 
         errors.append(message)
-        UNMATCHED_ENTITIES[error.absolute_schema_path[1]].append(error.instance)
 
     return errors
 
