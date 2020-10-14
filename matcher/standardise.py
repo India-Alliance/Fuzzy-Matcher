@@ -25,7 +25,7 @@ def standardise_name(uploaded_name, standard_univs):
 
     # Name match scores
     standard_univs['full_name_similarity'] = standard_univs['Name'].apply(
-        lambda x: fuzz.ratio(processed_name, x)
+        lambda x: (fuzz.ratio(processed_name, x) if pd.notna(x) else 0)
     )
     full_name_match_idx = standard_univs['full_name_similarity'].nlargest(n=1, keep='all').index
 
@@ -36,7 +36,7 @@ def standardise_name(uploaded_name, standard_univs):
 
     # Alias match scores
     standard_univs['alias_similarity'] = standard_univs['alias'].apply(
-        lambda x: fuzz.ratio(processed_name, x)
+        lambda x: (fuzz.ratio(processed_name, x) if pd.notna(x) else 0)
     )
     alias_match_idx = standard_univs['alias_similarity'].nlargest(n=1, keep='all').index
 
@@ -62,9 +62,6 @@ def standardise_name(uploaded_name, standard_univs):
 
     # TODO: This is only returning the FIRST match. What if there are two
     #  names with the same score?
-
-    print(alias_matches)
-    print(full_name_matches)
 
     if len(alias_matches) == 0 or alias_matches[0][1] <= full_name_matches[0][1]:
         return full_name_matches[0]
