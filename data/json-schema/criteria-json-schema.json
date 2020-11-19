@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Base schema.",
+  "type": "object",
+  "required": [
+    "funder",
+    "programme_name",
+    "funding_year",
+    "application_id",
+    "family_name",
+    "initials",
+    "gender",
+    "affiliation_proposed"
+  ],
+  "fuzzy-match": {
+    "affiliation_proposed": "affiliation",
+    "affiliation_current": "affiliation"
+
+  },
+  "properties": {
+    "funder": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Name of the funder"
+    },
+    "programme_name": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Name of the funding programme"
+    },
+    "funding_year": {
+      "type": "integer",
+      "minimum": 1900,
+      "maximum": 2020,
+      "description":  "Year of decision"
+    },
+    "funding_round": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of funding round (if multiple rounds are available in the same funding_year)"
+    },
+    "application_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Unique identifier of the application (It should be possible to link this back to the funders' own internal systems for possible future analyses.)"
+    },
+    "applicant_id":{
+      "type": "string",
+      "description": "Unique internal identifier of the applicant (We use this to identify multiple applications from same applicant)",
+      "maxLength": 255
+    },
+    "ORCID_id": {
+      "type": "string",
+      "maxLength": 19,
+      "minLength": 19,
+      "description": "ORCID id of applicant"
+    },
+    "given_name": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Applicant given name"
+    },
+    "family_name": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Applicant family name"
+    },
+    "initials": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Applicant initials (without dots)"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Applicant's e mail address",
+      "format": "email"
+    },
+    "gender": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "enum": ["M", "F", "N", "P", "O"],
+      "description": "Male, Female, Non-binary, Prefer to self-describe and Other"
+    },
+    "affiliation_proposed": {
+      "$ref": "universities.json#/definitions/university",
+      "description": "Proposed organisational affiliation within application, if different from affiliation at time of application"
+    },
+    "city_proposed": {
+      "type": "string",
+      "description": "Official city name of affiliation (preferably in English)"
+    },
+    "country_proposed": {
+      "$ref": "countries.json#/definitions/country",
+      "description": "ISO 3166-alpha-2 numeric country code of affiliation"
+    },
+    "affiliation_current": {
+      "$ref": "universities.json#/definitions/university",
+      "description": "Organisational affiliation at time of application"
+    },
+    "city_current": {
+      "type": "string",
+      "description": "Official city name of affiliation (preferably in English)"
+    },
+    "country_current": {
+      "$ref": "countries.json#/definitions/country",
+      "description": "ISO 3166-alpha-2 numeric country code of affiliation"
+    },
+    "proposal_abstract": {
+      "type": "string",
+      "description": "Abstract, synopsis, or other short description of proposed research"
+    },
+    "proposal_title": {
+      "type": "string",
+      "description": "Title of submitted proposal"
+    },
+    "is_awarded": {
+      "type": "string",
+      "enum": ["Y", "N"],
+      "description": "Was the grant application awarded, yes (Y), or no (N). Exclude withdrawn awards which were never started"
+    },
+    "birth_year": {
+      "type": "integer",
+      "description": "Year of birth of applicant",
+      "maximum": 2020,
+      "minimum": 1900
+    },
+    "phd_awarded_year": {
+      "type": "integer",
+      "description": "Year of obtaining PhD",
+      "maximum": 2020,
+      "minimum": 1900
+    },
+    "amount_awarded": {
+      "type": "number",
+      "description": "Total amount awarded in numbers (do not include commas or currency symbols such as \u00a3).",
+      "title": "Amount awarded"
+    },
+    "currency": {
+      "$ref": "currencies.json#/definitions/currency"
+    }
+  }
+}
