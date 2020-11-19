@@ -7,3 +7,7 @@ Misc/
 .ipynb_checkpoints
 
 *.txt
+
+data/json-schema/criteria-json-schema.json
+
+data/json-schema/main-schema.json
