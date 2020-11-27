@@ -52,7 +52,6 @@ if __name__ == "__main__":
     parser.add_argument('-l', '--list', nargs='+', action='append', help='Column names to standardise')
 
     args = parser.parse_args()
-    print(type(args.list))
     if args.validate:
         unmatched_entities = validate_data(args.path_to_file_to_standardise)
         print(unmatched_entities)
