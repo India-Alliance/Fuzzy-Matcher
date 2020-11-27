@@ -5,7 +5,6 @@ def convert_to_data_frame(matched_names, uploaded_names):
     actual_name = []
     confidence = []
     index_no = []
-    print(matched_names)
     for i in matched_names:
         actual_name.append(i[0])
         confidence.append(i[1])
