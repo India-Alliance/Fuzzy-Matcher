@@ -38,11 +38,13 @@ This is a simple script that overwrites the non-conformant entries after the use
 
     `pip -r requirements.txt`
 
-2. The file, `driver.py` runs the Validator and Matcher. In order to run the validator only, specify the `-v` flag and similarly, specify the `-m` flag for matching. `updater.py` runs the final update script.
 
-3. The usage is as follows. The input file is the file which one needs to standardise. The error logs are generated in the output file. Both of these can be optionally specified. The default names for input and output files are `test.csv` and `log.txt`. Note that the input file must be a `.csv`.
+2. The file, `driver.py` runs the Validator and Matcher. In order to run the validator only, specify the `-v` flag and similarly, specify the `-m` flag for matching. `updater.py` runs the final update script. Detailed information for running `driver.py` can be invoked using `python driver.py -h`.
+>>>>>>> f4b0c25b43490ab2a3782309f94ebb460ac348c8
 
-    `python driver.py <path_to_input_file> <path_to_output_file>`
+3. The usage is as follows. The input file is the file which one needs to standardise. The error logs are generated in the output file. Both of these can be optionally specified. The default output file is `log.txt`. Note that the input file must be a `.csv`. 
+
+    `python driver.py [-v | -m] path_to_input_file <path_to_output_file>`
 
 4. This generates two files -
 
