@@ -62,3 +62,4 @@ if __name__ == "__main__":
         unmatched_entities = validate_data(args.path_to_file_to_standardise)
         match_and_suggest_corrections(unmatched_entities, args.list[0])
 
+    print("A log of errors can be found in log.txt")
