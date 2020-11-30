@@ -1,5 +1,40 @@
 # Fuzzy-Matcher
-Fuzzy Match a name with a standard list
+This package validates data defined by a schema, outputting a log of errors. It was designed to validate data to be used in a project developed by the [Research On Research Insitute](http://researchonresearch.org). 
+
+In addition to validating entries, if your schema contains a field representing a unversity name, the package tries to fuzzy match the name to a standard name in the [GRID database](https://digitalscience.figshare.com/articles/dataset/GRID_release_2020-10-06/13084304) (distributed under CC0), enabling the user to correct invalid entries. A full description of the components can be found [below](#Validator).
+## Quickstart
+
+Pre-requisites: Python 3.6+, pip
+
+Clone the repository in your terminal and install the requirements (potentially in a virtual environment):
+
+```bash
+git clone git@github.com:India-Alliance/Fuzzy-Matcher.git
+cd Fuzzy-Matcher
+pip install -r requirements.txt 
+```
+Add your schema file (json) in data/json-schema/main-json-schema.json
+
+A test.csv is provided with some usual columns. If you only want to just validate your data:
+
+```bash
+ python driver.py test.csv -m -v
+```
+
+If you want to use the fuzzy matcher, you need to provide which columns contain university names:
+
+```bash
+python driver.py test.csv -m -l affiliation_proposed affiliation_current -v
+```
+
+This generates a file, `Suggestions.csv`, with a column called `'Correct (1/0)'` where the user determines whether to accept or reject each suggestions.
+
+After this, you can run:
+```bash
+python updater.py Suggestions.csv affiliation_current # or any column name to update 
+```
+
+And it will update the fuzzy matched entries in your csv.
 
 ## Components
 
@@ -31,27 +66,3 @@ The matcher takes in the non-exact matches as returned by the validator. It then
 ### Updater
 
 This is a simple script that overwrites the non-conformant entries after the user reviews them. This is run separately since it can run only after the user reviews the suggestions by the matcher.
-
-## Running the modules
-
-1. First, install the dependencies with 
-
-    `pip -r requirements.txt`
-
-
-2. The file, `driver.py` runs the Validator and Matcher. In order to run the validator only, specify the `-v` flag and similarly, specify the `-m` flag for matching. `updater.py` runs the final update script. Detailed information for running `driver.py` can be invoked using `python driver.py -h`.
-
-3. The usage is as follows. The input file is the file which one needs to standardise. The error logs are generated in the output file. Both of these can be optionally specified. The default output file is `log.txt`. Note that the input file must be a `.csv`. 
-
-    `python driver.py [-v | -m] path_to_input_file <path_to_output_file>`
-
-4. This generates two files -
-
-    - Non-conformant data entries are returned by the validator in a csv named `entries_to_fuzzy_match.csv`.
-    - `entries_to_fuzzy_match.csv` is fed to the matcher which outputs `Suggestions.csv`
-
-5. An extra column called `'Correct (1/0)'` is added to `Suggestions.csv` where the user determines which entry to update.
-
-6. This updated `Suggestions.csv` is now read by `updater.py` which updates the originally uploaded data with the standardised entries. The path to input file is the same as the one used for `driver.py`.
-
-    `python updater.py <path_to_input_file> <column_name_to_update>`

@@ -18,7 +18,7 @@ def load_json_file():
     HERE = os.path.dirname(os.path.abspath(__file__))
 
     SCHEMA_FILE = os.path.abspath(
-        os.path.join(HERE, '../Fuzzy-Matcher/data/json-schema/criteria-json-schema.json')
+        os.path.join(HERE, '../Fuzzy-Matcher/data/json-schema/main-json-schema.json')
     )
     SCHEMA_DIR = os.path.dirname(SCHEMA_FILE)
 
@@ -54,7 +54,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.validate:
         unmatched_entities = validate_data(args.path_to_file_to_standardise)
-        print(unmatched_entities)
 
     if args.match and not args.list:
         print('Please specify lists of columns to match using -l')
@@ -63,3 +62,4 @@ if __name__ == "__main__":
         unmatched_entities = validate_data(args.path_to_file_to_standardise)
         match_and_suggest_corrections(unmatched_entities, args.list[0])
 
+    print("A log of errors can be found in log.txt")
