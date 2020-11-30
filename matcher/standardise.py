@@ -71,7 +71,7 @@ def standardise_name(uploaded_name, standard_names):
 
 
 
-def standardise_list(file, column_name_to_standardise, column_entity_type):
+def standardise_list(file, column_name_to_standardise, column_entity_type='affiliation'):
     t1 = time.time()
     uploaded_data = pd.read_csv(file)
 
