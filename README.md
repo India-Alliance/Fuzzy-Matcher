@@ -20,6 +20,7 @@ A test.csv is provided with some usual columns. If you only want to just validat
 ```bash
  python driver.py test.csv -v
 ```
+A log of errors can be found in `log.txt` after running this command.
 
 If you want to use the fuzzy matcher, you need to provide which columns contain university names:
 
