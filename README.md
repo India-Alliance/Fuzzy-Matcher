@@ -18,13 +18,13 @@ Add your schema file (json) in data/json-schema/main-json-schema.json
 A test.csv is provided with some usual columns. If you only want to just validate your data:
 
 ```bash
- python driver.py test.csv -m -v
+ python driver.py test.csv -v
 ```
 
 If you want to use the fuzzy matcher, you need to provide which columns contain university names:
 
 ```bash
-python driver.py test.csv -m -l affiliation_proposed affiliation_current -v
+python driver.py test.csv -m -l affiliation_proposed affiliation_current
 ```
 
 This generates a file, `Suggestions.csv`, with a column called `'Correct (1/0)'` where the user determines whether to accept or reject each suggestions.
