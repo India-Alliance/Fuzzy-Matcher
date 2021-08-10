@@ -18,7 +18,7 @@ def load_json_file():
     HERE = os.path.dirname(os.path.abspath(__file__))
 
     SCHEMA_FILE = os.path.abspath(
-        os.path.join(HERE, '../Fuzzy-Matcher/data/json-schema/main-json-schema.json')
+        os.path.join(HERE, '../Fuzzy-Matcher/data/json-schema/main-schema.json')
     )
     SCHEMA_DIR = os.path.dirname(SCHEMA_FILE)
 

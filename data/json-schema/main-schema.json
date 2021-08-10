@@ -40,7 +40,10 @@
     "currency": {
       "$ref": "currencies.json#/definitions/currency"
     },
-    "affiliationCurrent": {
+    "affiliation_current": {
+      "$ref": "universities.json#/definitions/university"
+    },
+    "affiliation_proposed": {
       "$ref": "universities.json#/definitions/university"
     },
     "countryCurrent": {
